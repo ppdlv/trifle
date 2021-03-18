@@ -36,7 +36,7 @@ else
 	wget -q https://github.com/pxdlima/trifle/raw/master/files/settings.dat
 	ln -s /usr/local/utorrent/utserver /usr/bin/utserver >/dev/null
 	echo "[Unit]
-Description=uTorrent service.
+Description=uTorrent service
 
 [Service]
 Type=simple
