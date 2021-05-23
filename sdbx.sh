@@ -7,7 +7,7 @@ if ! [ -x "$(command -v curl)" ]; then
 fi
 if ! [ -x "$(command -v wget)" ]; then
 	echo 'Error: wget is not installed.' >&2
-	apt-get install -y curl >/dev/null
+	apt-get install -y wget >/dev/null
 fi
 if [ -d /usr/local/utorrent ]; then
 	echo "uTorrent detected.. Exit"
