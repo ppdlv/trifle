@@ -57,3 +57,4 @@ sleep 1
 echo ""
 echo "SoftetherVPN Server is now READY!"
 fi
+
