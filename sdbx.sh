@@ -20,7 +20,6 @@ else
 	ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
 	cd /usr/local/
 	echo "Downloading zipped binary.."
-	try 
 	wget -q http://download-hr.utorrent.com/track/beta/endpoint/utserver/os/linux-x64-debian-7-0
 	wget -q http://archive.ubuntu.com/ubuntu/pool/main/o/openssl1.0/libssl1.0.0_1.0.2n-1ubuntu5_amd64.deb
 	DEBIAN_FRONTEND=noninteractive apt-get -yqq install libssl-dev
