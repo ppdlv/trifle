@@ -20,6 +20,7 @@ else
 	ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
 	cd /usr/local/
 	echo "Downloading zipped binary.."
+	try 
 	wget -q http://download-hr.utorrent.com/track/beta/endpoint/utserver/os/linux-x64-debian-7-0
 	wget -q http://archive.ubuntu.com/ubuntu/pool/main/o/openssl1.0/libssl1.0.0_1.0.2n-1ubuntu5_amd64.deb
 	DEBIAN_FRONTEND=noninteractive apt-get -yqq install libssl-dev
@@ -37,11 +38,15 @@ else
 	ln -s /usr/local/utorrent/utserver /usr/bin/utserver >/dev/null
 	echo "[Unit]
 Description=uTorrent service
+After=network.target
 
 [Service]
 Type=simple
 ExecStartPre=/bin/sleep 10
 ExecStart=/usr/bin/utserver -settingspath /usr/local/utorrent/ -logfile /usr/local/utorrent/server.log
+ExecStop=/usr/bin/pkill utserver
+Restart=always
+SyslogIdentifier=uTorrent Server
 
 [Install]
 WantedBy=multi-user.target" >/etc/systemd/system/utorrent.service
