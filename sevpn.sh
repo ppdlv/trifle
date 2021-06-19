@@ -1,5 +1,4 @@
 #!/bin/bash
-clear
 URL1=https://www.softether-download.com/files/softether/v4.34-9745-rtm-2020.04.05-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.34-9745-rtm-2020.04.05-linux-x64-64bit.tar.gz
 URL2=https://raw.githubusercontent.com/pxdlima/trifle/master/files/vpn_server.config
 ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
@@ -55,7 +54,7 @@ echo "Enter Password to CREATE Zip File:"
 /usr/local/vpnserver/vpncmd localhost /SERVER /CMD OpenVpnMakeConfig ovpn > /dev/null
 echo "SoftetherVPN Server is now READY!"
 }
-
+clear
 if [[ -d /usr/local/vpnserver ]]; then
 	echo "SoftEtherVPN detected.."
     until [[ $CONTINUE =~ (y|n) ]]; do
