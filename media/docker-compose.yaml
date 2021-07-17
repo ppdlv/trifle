@@ -1,5 +1,5 @@
----
-version: "2.1"
+version: "3.4"
+
 services:
   sonarr:
     image: ghcr.io/linuxserver/sonarr
@@ -7,48 +7,52 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Asia/Manila
     volumes:
-      - /path/to/data:/config
-      - /path/to/tvseries:/tv #optional
-      - /path/to/downloadclient-downloads:/downloads #optional
+      - /var/docker/sonarr:/config
+      - /var/docker/sonarr/tv:/tv #optional
+      - /var/docker/sonarr/downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
 
----
-version: "2.1"
-services:
   radarr:
     image: ghcr.io/linuxserver/radarr
     container_name: radarr
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Asia/Manila
     volumes:
-      - /path/to/data:/config
-      - /path/to/movies:/movies #optional
-      - /path/to/downloadclient-downloads:/downloads #optional
+      - /var/docker/radarr:/config
+      - /var/docker/radarr/tv:/movies #optional
+      - /var/docker/radarr/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
-    
----
-version: "2.1"
-services:
+
   jackett:
     image: ghcr.io/linuxserver/jackett
     container_name: jackett
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=Asia/Manila
       - AUTO_UPDATE=true #optional
-      - RUN_OPTS=<run options here> #optional
     volumes:
-      - <path to data>:/config
-      - <path to blackhole>:/downloads
+      - /var/docker/jackett:/config
+      - /var/docker/jackett/downloads:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - /var/docker/nginx/template:/etc/nginx/templates
+      - /var/docker/nginx/conf:/etc/nginx/conf.d
+      - /var/docker/nginx/html/:/usr/share/nginx/html
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_PORT=80
