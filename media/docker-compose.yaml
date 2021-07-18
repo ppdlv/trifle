@@ -4,14 +4,16 @@ services:
   sonarr:
     image: ghcr.io/linuxserver/sonarr
     container_name: sonarr
+    networks:
+      static-network:
+        ipv4_address: 172.21.0.101
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Manila
     volumes:
       - /var/docker/sonarr:/config
-      - /var/docker/sonarr/tv:/tv #optional
-      - /var/docker/sonarr/downloads:/downloads #optional
+      - /var/nfs/sonarr:/var/nfs/sonarr # fileshare
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -19,14 +21,16 @@ services:
   radarr:
     image: ghcr.io/linuxserver/radarr
     container_name: radarr
+    networks:
+      static-network:
+        ipv4_address: 172.21.0.102
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Manila
     volumes:
       - /var/docker/radarr:/config
-      - /var/docker/radarr/tv:/movies #optional
-      - /var/docker/radarr/downloads:/downloads #optional
+      - /var/radarr/radarr:/var/nfs/radarr # filesahre
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -34,6 +38,9 @@ services:
   jackett:
     image: ghcr.io/linuxserver/jackett
     container_name: jackett
+    networks:
+      static-network:
+        ipv4_address: 172.21.0.103
     environment:
       - PUID=1000
       - PGID=1000
@@ -41,18 +48,26 @@ services:
       - AUTO_UPDATE=true #optional
     volumes:
       - /var/docker/jackett:/config
-      - /var/docker/jackett/downloads:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
   nginx:
     image: nginx
     container_name: nginx
+    networks:
+      static-network:
+        ipv4_address: 172.21.0.180
     volumes:
-      - /var/docker/nginx/template:/etc/nginx/templates
       - /var/docker/nginx/conf:/etc/nginx/conf.d
       - /var/docker/nginx/html/:/usr/share/nginx/html
     ports:
       - "80:80"
     environment:
       - NGINX_PORT=80
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+          #docker-compose v3+ do not use ip_range
+          #ip_range: 172.28.5.0/24
