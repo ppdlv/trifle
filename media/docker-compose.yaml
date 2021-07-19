@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.3"
 
 services:
   sonarr:
@@ -12,7 +12,7 @@ services:
       - PGID=1000
       - TZ=Asia/Manila
     volumes:
-      - /var/docker/sonarr:/config
+      - /var/nfs/sonarr:/config
       - /var/nfs/sonarr:/var/nfs/sonarr # fileshare
     ports:
       - 8989:8989
@@ -29,8 +29,8 @@ services:
       - PGID=1000
       - TZ=Asia/Manila
     volumes:
-      - /var/docker/radarr:/config
-      - /var/radarr/radarr:/var/nfs/radarr # filesahre
+      - /var/nfs/radarr:/config
+      - /var/nfs/radarr:/var/nfs/radarr # filesahre
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -47,7 +47,7 @@ services:
       - TZ=Asia/Manila
       - AUTO_UPDATE=true #optional
     volumes:
-      - /var/docker/jackett:/config
+      - /var/nfs/jackett:/config
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -58,8 +58,8 @@ services:
       static-network:
         ipv4_address: 172.21.0.180
     volumes:
-      - /var/docker/nginx/conf:/etc/nginx/conf.d
-      - /var/docker/nginx/html/:/usr/share/nginx/html
+      - /var/nfs/nginx/conf:/etc/nginx/conf.d
+      - /var/nfs/nginx/html/:/usr/share/nginx/html
     ports:
       - "80:80"
     environment:
