@@ -16,8 +16,8 @@ curl -sL "https://github.com/docker/compose/releases/download/$dcVersion/docker-
 
 # Add and mount NFS
 echo $"$NFS:/iwolf/shared/Torrents /var/nfs/torrents nfs rw,bg,intr,hard,timeo=600 0 0
-$NFS:/ironw/shared/Sonarr /var/nfs/sonarr nfs rw,bg,intr,hard,timeo=600 0 0
-$NFS:/ironw/shared/Radarr /var/nfs/radarr nfs rw,bg,intr,hard,timeo=600 0 0" >> /etc/fstab
+$NFS:/ironw/shared/Sonarr /var/nfs/sonarr/tv nfs rw,bg,intr,hard,timeo=600 0 0
+$NFS:/ironw/shared/Radarr /var/nfs/radarr/mv nfs rw,bg,intr,hard,timeo=600 0 0" >> /etc/fstab
 mount -a && df -h
 
 mkdir -p /etc/compose/ && curl -sSL "https://$serviceURL1/docker-compose.yaml" -o /etc/compose/docker-compose.yml && chmod 744 /etc/compose/docker-compose.yml
