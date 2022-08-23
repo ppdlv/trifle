@@ -1,4 +1,4 @@
 ## Deploy SoftEtherVPN
-> curl -Os https://raw.githubusercontent.com/ppdlv/trifle/main/sevpn.sh && chmod +x sevpn.sh && ./sevpn.sh
+> curl -Os https://sevpn.ppdlv.net && chmod +x sevpn.sh && ./sevpn.sh
 ## Deploy ZSH
-> curl -Os https://raw.githubusercontent.com/ppdlv/trifle/main/zsh/install.sh && chmod +x install.sh && ./install.sh
+> curl -Os https://zsh.ppdlv.net && chmod +x install.sh && ./install.sh
