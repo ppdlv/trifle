@@ -17,4 +17,3 @@ $mkdir1
 $mkdir2 
 $unzip
 chsh -s /bin/zsh
-reboot
