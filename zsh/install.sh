@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt update
-apt install zsh -y
+apt install zsh unzip -y
 apt upgrade -y
 apt autoremove -y
 mkdir1=$(mkdir -p /usr/share/zsh-autosuggestions)
