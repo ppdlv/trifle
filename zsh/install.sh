@@ -19,6 +19,3 @@ $wget
 unzip -o /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zip -d /usr/share/zsh-syntax-highlighting
 rm -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zip
 chsh -s /bin/zsh
-
-# Exit shell
-disown -a && exit
