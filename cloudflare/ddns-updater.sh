@@ -45,10 +45,10 @@ record_identifier=$(echo "$record" | grep -Po '(?<="id":")[^"]*' | head -1)
 
 ## Change the IP@Cloudflare using the API
 update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$zone_identifier/dns_records/$record_identifier" \
-                     -H "X-Auth-Email: $auth_email" \
-                     -H "X-Auth-Key: $auth_key" \
-                     -H "Content-Type: application/json" \
-              --data "{\"id\":\"$zone_identifier\",\"type\":\"A\",\"proxied\":${proxy},\"name\":\"$record_name\",\"content\":\"$ip\"}")
+        -H "X-Auth-Email: $auth_email" \
+        -H "X-Auth-Key: $auth_key" \
+        -H "Content-Type: application/json" \
+        --data "{\"id\":\"$zone_identifier\",\"type\":\"A\",\"proxied\":${proxy},\"name\":\"$record_name\",\"content\":\"$ip\"}")
 
 ## Report the status
 case "$update" in
