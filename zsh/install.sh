@@ -64,7 +64,7 @@ function installZSH() {
 # Check for root and OS...
 initialCheck
 
-# Check if WireGuard is already installed and load params
+# Check if ZSH is already installed and load params
 if [[ -e /etc/zsh ]]; then
 	manageMenu
 else
