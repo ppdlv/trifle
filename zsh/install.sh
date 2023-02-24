@@ -49,7 +49,8 @@ function manageMenu() {
 function installZSH() {
     apt update
     apt install zsh unzip wget curl -y
-    apt upgrade -y
+	## Removed upgrading packages to avoid inadvertent complications 24-02
+    # apt upgrade -y
     apt autoremove -y
     mkdir -p /usr/share/zsh-autosuggestions
     mkdir -p /usr/share/zsh-syntax-highlighting
@@ -61,13 +62,12 @@ function installZSH() {
     chsh -s /bin/zsh
 }
 
-# Check for root and OS...
 initialCheck
 
 # Check if ZSH is already installed and load params
 if [[ -e /etc/zsh ]]; then
 	manageMenu
 else
-    echo "Doing first install workflow"
+    echo "Proceed to install workflow.."
 	installZSH
 fi
